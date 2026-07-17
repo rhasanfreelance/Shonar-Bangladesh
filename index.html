@@ -1,0 +1,1883 @@
+<!doctype html>
+<html lang="bn">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>সোনার বাংলা — The Digital Soul of Bangladesh</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Manrope:wght@300;400;500;600;700;800&family=Noto+Serif+Bengali:wght@400;500;600;700&family=Hind+Siliguri:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <style>
+      :root {
+        --ink: #0f1b15;
+        --ink-soft: #1b2b22;
+        --paper: #f1e9d6;
+        --paper-dim: #e7dcc3;
+        --clay: #9c4326;
+        --clay-soft: #b7562f;
+        --gold: #c9a227;
+        --gold-soft: #dec168;
+        --teal: #2c5349;
+        --khaki: #7c7052;
+        --line: rgba(241, 233, 214, 0.14);
+        --line-dark: rgba(15, 27, 21, 0.12);
+        --serif: "Fraunces", "Noto Serif Bengali", serif;
+        --bn-serif: "Noto Serif Bengali", serif;
+        --sans: "Manrope", sans-serif;
+        --bn-sans: "Hind Siliguri", sans-serif;
+      }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        background: var(--ink);
+        color: var(--paper);
+        font-family: var(--sans);
+        overflow-x: hidden;
+        -webkit-font-smoothing: antialiased;
+        cursor: default;
+      }
+      .bn {
+        font-family: var(--bn-serif);
+      }
+      .bn-sans {
+        font-family: var(--bn-sans);
+      }
+      ::selection {
+        background: var(--gold);
+        color: var(--ink);
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+      img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      /* ---------- utility ---------- */
+      .eyebrow {
+        font-family: var(--sans);
+        font-size: 12px;
+        letter-spacing: 0.28em;
+        text-transform: uppercase;
+        color: var(--gold-soft);
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+      .eyebrow::before {
+        content: "";
+        width: 28px;
+        height: 1px;
+        background: var(--gold-soft);
+      }
+      .section-pad {
+        padding: min(14vw, 180px) 6vw;
+      }
+      .wrap {
+        max-width: 1360px;
+        margin: 0 auto;
+      }
+
+      /* ---------- river progress thread ---------- */
+      #river-thread {
+        position: fixed;
+        left: 22px;
+        top: 0;
+        height: 100vh;
+        width: 60px;
+        z-index: 60;
+        pointer-events: none;
+        display: flex;
+        align-items: center;
+      }
+      #river-thread svg {
+        overflow: visible;
+      }
+      #river-path-bg {
+        fill: none;
+        stroke: rgba(241, 233, 214, 0.12);
+        stroke-width: 1.4;
+      }
+      #river-path-fg {
+        fill: none;
+        stroke: var(--gold);
+        stroke-width: 1.6;
+        stroke-dasharray: 1300;
+        stroke-dashoffset: 1300;
+        filter: drop-shadow(0 0 4px rgba(201, 162, 39, 0.6));
+      }
+      @media (max-width: 900px) {
+        #river-thread {
+          display: none;
+        }
+      }
+
+      /* ---------- nav ---------- */
+      header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 50;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 26px 6vw;
+        mix-blend-mode: difference;
+      }
+      .logo {
+        font-family: var(--bn-serif);
+        font-size: 22px;
+        font-weight: 600;
+        letter-spacing: 0.02em;
+      }
+      .logo span {
+        font-family: var(--sans);
+        font-size: 10px;
+        letter-spacing: 0.3em;
+        display: block;
+        text-transform: uppercase;
+        opacity: 0.65;
+        margin-top: 2px;
+        font-weight: 500;
+      }
+      nav ul {
+        list-style: none;
+        display: flex;
+        gap: 36px;
+        font-size: 13px;
+        letter-spacing: 0.05em;
+      }
+      @media (max-width: 900px) {
+        nav ul {
+          display: none;
+        }
+      }
+      .menu-btn {
+        width: 44px;
+        height: 44px;
+        border: 1px solid rgba(241, 233, 214, 0.4);
+        border-radius: 50%;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        font-size: 11px;
+        letter-spacing: 0.1em;
+      }
+      @media (max-width: 900px) {
+        .menu-btn {
+          display: flex;
+        }
+      }
+
+      /* ---------- hero ---------- */
+      .hero {
+        position: relative;
+        height: 100svh;
+        min-height: 640px;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        overflow: hidden;
+      }
+      .hero-media {
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+      }
+      .hero-media img {
+        transform: scale(1.15);
+      }
+      .hero-scrim {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          180deg,
+          rgba(15, 27, 21, 0.55) 0%,
+          rgba(15, 27, 21, 0.15) 32%,
+          rgba(15, 27, 21, 0.35) 60%,
+          rgba(15, 27, 21, 0.96) 100%
+        );
+        z-index: 1;
+      }
+      .hero-grain {
+        position: absolute;
+        inset: 0;
+        z-index: 2;
+        opacity: 0.05;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      }
+      .hero-content {
+        position: relative;
+        z-index: 3;
+        padding: 0 6vw 7vw;
+      }
+      .hero-eyebrow {
+        font-size: 12px;
+        letter-spacing: 0.3em;
+        text-transform: uppercase;
+        color: var(--gold-soft);
+        margin-bottom: 22px;
+        opacity: 0;
+      }
+      .hero-title {
+        font-family: var(--bn-serif);
+        font-weight: 700;
+        font-size: clamp(70px, 15vw, 220px);
+        line-height: 0.92;
+        letter-spacing: -0.01em;
+        color: var(--paper);
+      }
+      .hero-title .word {
+        display: inline-block;
+        overflow: hidden;
+        vertical-align: top;
+      }
+      .hero-title .word span {
+        display: inline-block;
+        transform: translateY(115%);
+      }
+      .hero-sub {
+        margin-top: 26px;
+        max-width: 640px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        opacity: 0;
+      }
+      .hero-sub .bn-line {
+        font-family: var(--bn-sans);
+        font-size: 20px;
+        color: var(--paper-dim);
+      }
+      .hero-sub .en-line {
+        font-family: var(--serif);
+        font-style: italic;
+        font-size: 17px;
+        color: var(--gold-soft);
+        font-weight: 400;
+      }
+      .scroll-cue {
+        position: absolute;
+        bottom: 34px;
+        right: 6vw;
+        z-index: 3;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        font-size: 11px;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: var(--paper-dim);
+        opacity: 0;
+      }
+      .scroll-cue .bar {
+        width: 1px;
+        height: 38px;
+        background: rgba(241, 233, 214, 0.35);
+        position: relative;
+        overflow: hidden;
+      }
+      .scroll-cue .bar::after {
+        content: "";
+        position: absolute;
+        top: -100%;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: var(--gold);
+        animation: cue 2.2s ease-in-out infinite;
+      }
+      @keyframes cue {
+        0% {
+          top: -100%;
+        }
+        60% {
+          top: 100%;
+        }
+        100% {
+          top: 100%;
+        }
+      }
+
+      /* ---------- pull quote ---------- */
+      .quote-section {
+        background: var(--ink);
+        padding: min(16vw, 220px) 6vw;
+        text-align: center;
+        position: relative;
+      }
+      .quote-section .wrap {
+        max-width: 1020px;
+      }
+      .quote-bn {
+        font-family: var(--bn-serif);
+        font-weight: 600;
+        font-size: clamp(30px, 4.6vw, 58px);
+        line-height: 1.35;
+        color: var(--paper);
+      }
+      .quote-en {
+        margin-top: 28px;
+        font-family: var(--serif);
+        font-style: italic;
+        font-weight: 400;
+        font-size: clamp(16px, 1.6vw, 20px);
+        color: var(--khaki);
+        letter-spacing: 0.01em;
+      }
+      .quote-en::before {
+        content: "— ";
+      }
+
+      /* ---------- glance ---------- */
+      .glance {
+        background: var(--paper);
+        color: var(--ink);
+        position: relative;
+      }
+      .glance .head {
+        padding: min(10vw, 120px) 6vw 40px;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        flex-wrap: wrap;
+        gap: 24px;
+      }
+      .glance .eyebrow {
+        color: var(--clay);
+      }
+      .glance .eyebrow::before {
+        background: var(--clay);
+      }
+      .glance h2 {
+        font-family: var(--bn-serif);
+        font-weight: 700;
+        font-size: clamp(34px, 5vw, 64px);
+        margin-top: 14px;
+      }
+      .glance-lede {
+        max-width: 420px;
+        font-size: 15px;
+        line-height: 1.7;
+        color: var(--ink-soft);
+        opacity: 0.8;
+      }
+      .stat-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        border-top: 1px solid var(--line-dark);
+      }
+      @media (max-width: 900px) {
+        .stat-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+      .stat {
+        padding: 52px 34px;
+        border-right: 1px solid var(--line-dark);
+        border-bottom: 1px solid var(--line-dark);
+        position: relative;
+        overflow: hidden;
+      }
+      .stat:hover {
+        background: var(--ink);
+        color: var(--paper);
+      }
+      .stat:hover .stat-label {
+        color: var(--gold-soft);
+      }
+      .stat-num {
+        font-family: var(--serif);
+        font-weight: 500;
+        font-size: clamp(38px, 4.2vw, 58px);
+        display: flex;
+        align-items: baseline;
+        gap: 4px;
+      }
+      .stat-unit {
+        font-size: 16px;
+        font-family: var(--sans);
+        opacity: 0.6;
+      }
+      .stat-label {
+        margin-top: 10px;
+        font-size: 12px;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--khaki);
+        transition: color 0.3s;
+      }
+      .stat-bn {
+        font-family: var(--bn-sans);
+        font-size: 14px;
+        margin-top: 4px;
+        opacity: 0.7;
+      }
+
+      /* ---------- rivers ---------- */
+      .rivers {
+        position: relative;
+        background: var(--teal);
+        color: var(--paper);
+      }
+      .rivers-inner {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        min-height: 100vh;
+      }
+      @media (max-width: 960px) {
+        .rivers-inner {
+          grid-template-columns: 1fr;
+        }
+      }
+      .rivers-text {
+        padding: min(9vw, 110px) 6vw;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+      .rivers-text h2 {
+        font-family: var(--bn-serif);
+        font-size: clamp(38px, 5vw, 68px);
+        font-weight: 700;
+        line-height: 1.05;
+        margin: 18px 0 24px;
+      }
+      .rivers-text p {
+        max-width: 460px;
+        font-size: 15.5px;
+        line-height: 1.85;
+        color: rgba(241, 233, 214, 0.82);
+        margin-bottom: 16px;
+      }
+      .river-list {
+        margin-top: 28px;
+        display: flex;
+        flex-direction: column;
+      }
+      .river-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 16px 0;
+        border-top: 1px solid rgba(241, 233, 214, 0.18);
+        font-family: var(--serif);
+        font-size: 18px;
+      }
+      .river-row:last-child {
+        border-bottom: 1px solid rgba(241, 233, 214, 0.18);
+      }
+      .river-row span:last-child {
+        font-family: var(--bn-sans);
+        font-size: 14px;
+        color: var(--gold-soft);
+      }
+      .rivers-media {
+        position: relative;
+        overflow: hidden;
+        min-height: 420px;
+      }
+      .rivers-media img {
+        filter: saturate(1.05) contrast(1.02);
+      }
+
+      /* ---------- destinations horizontal ---------- */
+      .dest-pin {
+        background: var(--ink);
+        position: relative;
+        overflow: hidden;
+      }
+      .dest-head {
+        padding: min(10vw, 120px) 6vw 50px;
+      }
+      .dest-head h2 {
+        font-family: var(--bn-serif);
+        font-size: clamp(36px, 5.5vw, 70px);
+        font-weight: 700;
+        margin-top: 14px;
+      }
+      .dest-track {
+        display: flex;
+        gap: 28px;
+        padding: 0 6vw 10px;
+        will-change: transform;
+      }
+      .dest-card {
+        position: relative;
+        flex: 0 0 auto;
+        width: min(72vw, 460px);
+        height: min(78vh, 600px);
+        border-radius: 2px;
+        overflow: hidden;
+      }
+      .dest-card img {
+        transition: transform 1.1s cubic-bezier(0.16, 0.8, 0.24, 1);
+      }
+      .dest-card:hover img {
+        transform: scale(1.06);
+      }
+      .dest-scrim {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          180deg,
+          rgba(15, 27, 21, 0) 45%,
+          rgba(15, 27, 21, 0.92) 100%
+        );
+      }
+      .dest-num {
+        position: absolute;
+        top: 24px;
+        left: 24px;
+        font-family: var(--serif);
+        font-style: italic;
+        font-size: 14px;
+        color: var(--gold-soft);
+      }
+      .dest-info {
+        position: absolute;
+        left: 26px;
+        right: 26px;
+        bottom: 26px;
+      }
+      .dest-info .place-en {
+        font-size: 11px;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: var(--gold-soft);
+      }
+      .dest-info h3 {
+        font-family: var(--bn-serif);
+        font-size: 30px;
+        font-weight: 600;
+        margin-top: 8px;
+      }
+      .dest-info p {
+        font-size: 13px;
+        color: var(--paper-dim);
+        margin-top: 8px;
+        max-width: 320px;
+        line-height: 1.6;
+      }
+
+      /* ---------- map ---------- */
+      .map-section {
+        background: var(--paper);
+        color: var(--ink);
+      }
+      .map-inner {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        align-items: center;
+      }
+      @media (max-width: 960px) {
+        .map-inner {
+          grid-template-columns: 1fr;
+        }
+      }
+      .map-copy {
+        padding: min(9vw, 110px) 6vw;
+      }
+      .map-copy h2 {
+        font-family: var(--bn-serif);
+        font-size: clamp(36px, 5vw, 64px);
+        font-weight: 700;
+        margin: 16px 0 20px;
+      }
+      .map-copy p {
+        max-width: 440px;
+        font-size: 15px;
+        line-height: 1.8;
+        color: var(--ink-soft);
+        opacity: 0.85;
+        margin-bottom: 8px;
+      }
+      .map-stage {
+        position: relative;
+        padding: 60px 6vw;
+        min-height: 520px;
+      }
+      .map-svg-wrap {
+        position: relative;
+        width: 100%;
+        max-width: 560px;
+        margin: 0 auto;
+        aspect-ratio: 1/1.25;
+      }
+      .division {
+        position: absolute;
+        border-radius: 38% 62% 55% 45% / 45% 40% 60% 55%;
+        background: var(--ink);
+        opacity: 0.86;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition:
+          transform 0.45s cubic-bezier(0.16, 0.8, 0.24, 1),
+          background 0.3s,
+          opacity 0.3s;
+        box-shadow: 0 10px 30px -12px rgba(15, 27, 21, 0.4);
+      }
+      .division:hover,
+      .division.active {
+        background: var(--clay);
+        opacity: 1;
+        transform: translateY(-6px) scale(1.05);
+      }
+      .division span {
+        font-family: var(--bn-sans);
+        color: var(--paper);
+        font-size: 13px;
+        font-weight: 500;
+        pointer-events: none;
+        text-align: center;
+        padding: 4px 8px;
+      }
+      .map-panel {
+        position: absolute;
+        left: 50%;
+        bottom: -10px;
+        transform: translate(-50%, 0);
+        background: var(--ink);
+        color: var(--paper);
+        width: min(90%, 340px);
+        padding: 22px 24px;
+        border-radius: 2px;
+        box-shadow: 0 30px 60px -20px rgba(15, 27, 21, 0.5);
+        opacity: 0;
+        pointer-events: none;
+        transition:
+          opacity 0.3s,
+          transform 0.3s;
+      }
+      .map-panel.show {
+        opacity: 1;
+        transform: translate(-50%, 20px);
+      }
+      .map-panel .p-title {
+        font-family: var(--bn-serif);
+        font-size: 22px;
+        font-weight: 600;
+      }
+      .map-panel .p-en {
+        font-size: 10px;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: var(--gold-soft);
+        margin-top: 4px;
+      }
+      .map-panel .p-facts {
+        display: flex;
+        gap: 20px;
+        margin-top: 14px;
+      }
+      .map-panel .p-facts div {
+        font-size: 11px;
+        color: var(--khaki);
+      }
+      .map-panel .p-facts b {
+        display: block;
+        font-family: var(--serif);
+        font-size: 16px;
+        color: var(--paper);
+        font-weight: 500;
+      }
+      .map-panel .p-desc {
+        margin-top: 12px;
+        font-size: 12.5px;
+        line-height: 1.6;
+        color: var(--paper-dim);
+      }
+
+      /* ---------- unesco ---------- */
+      .unesco {
+        background: var(--ink);
+      }
+      .unesco-head {
+        padding: min(10vw, 120px) 6vw 50px;
+      }
+      .unesco-head h2 {
+        font-family: var(--bn-serif);
+        font-size: clamp(36px, 5.5vw, 70px);
+        font-weight: 700;
+        margin-top: 14px;
+      }
+      .unesco-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1px;
+        background: var(--line);
+        margin: 0 6vw 0;
+        border: 1px solid var(--line);
+      }
+      @media (max-width: 900px) {
+        .unesco-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+      .unesco-card {
+        background: var(--ink);
+        padding: 0;
+        position: relative;
+      }
+      .unesco-media {
+        height: 280px;
+        position: relative;
+        overflow: hidden;
+      }
+      .unesco-media img {
+        filter: grayscale(0.15);
+        transition: filter 0.5s;
+      }
+      .unesco-card:hover .unesco-media img {
+        filter: grayscale(0);
+      }
+      .unesco-body {
+        padding: 30px 28px 40px;
+      }
+      .unesco-body .yr {
+        font-size: 11px;
+        letter-spacing: 0.18em;
+        color: var(--gold-soft);
+        text-transform: uppercase;
+      }
+      .unesco-body h3 {
+        font-family: var(--bn-serif);
+        font-size: 24px;
+        font-weight: 600;
+        margin: 10px 0 12px;
+      }
+      .unesco-body p {
+        font-size: 13.5px;
+        line-height: 1.7;
+        color: var(--paper-dim);
+      }
+
+      /* ---------- timeline ---------- */
+      .timeline {
+        background: var(--paper);
+        color: var(--ink);
+      }
+      .timeline-head {
+        padding: min(10vw, 120px) 6vw 20px;
+      }
+      .timeline-head h2 {
+        font-family: var(--bn-serif);
+        font-size: clamp(36px, 5.5vw, 70px);
+        font-weight: 700;
+        margin-top: 14px;
+      }
+      .timeline-list {
+        padding: 40px 6vw min(10vw, 120px);
+      }
+      .t-row {
+        display: grid;
+        grid-template-columns: 140px 1fr;
+        gap: 34px;
+        padding: 34px 0;
+        border-top: 1px solid var(--line-dark);
+        position: relative;
+      }
+      .t-row:last-child {
+        border-bottom: 1px solid var(--line-dark);
+      }
+      .t-year {
+        font-family: var(--serif);
+        font-size: 26px;
+        font-weight: 500;
+        color: var(--clay);
+      }
+      .t-body h4 {
+        font-family: var(--bn-serif);
+        font-size: 21px;
+        font-weight: 600;
+        margin-bottom: 8px;
+      }
+      .t-body p {
+        font-size: 14px;
+        line-height: 1.75;
+        color: var(--ink-soft);
+        opacity: 0.82;
+        max-width: 640px;
+      }
+      @media (max-width: 640px) {
+        .t-row {
+          grid-template-columns: 1fr;
+          gap: 8px;
+        }
+      }
+
+      /* ---------- culture marquee ---------- */
+      .culture {
+        background: var(--clay);
+        color: var(--paper);
+        padding: min(10vw, 120px) 0;
+        overflow: hidden;
+        position: relative;
+      }
+      .culture-head {
+        padding: 0 6vw 50px;
+      }
+      .culture-head h2 {
+        font-family: var(--bn-serif);
+        font-size: clamp(34px, 5vw, 62px);
+        font-weight: 700;
+        margin-top: 14px;
+      }
+      .marquee {
+        display: flex;
+        white-space: nowrap;
+      }
+      .marquee .track {
+        display: flex;
+        gap: 60px;
+        padding-right: 60px;
+        animation: marq 34s linear infinite;
+      }
+      @keyframes marq {
+        from {
+          transform: translateX(0);
+        }
+        to {
+          transform: translateX(-50%);
+        }
+      }
+      .marquee .item {
+        font-family: var(--bn-serif);
+        font-size: clamp(32px, 6vw, 84px);
+        font-weight: 600;
+        opacity: 0.92;
+        display: flex;
+        align-items: center;
+        gap: 26px;
+      }
+      .marquee .item small {
+        font-family: var(--sans);
+        font-size: 13px;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        opacity: 0.6;
+      }
+      .culture-sub {
+        padding: 60px 6vw 0;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 36px;
+      }
+      @media (max-width: 900px) {
+        .culture-sub {
+          grid-template-columns: 1fr;
+        }
+      }
+      .culture-sub .c-item {
+        border-top: 1px solid rgba(241, 233, 214, 0.3);
+        padding-top: 18px;
+      }
+      .culture-sub h5 {
+        font-family: var(--bn-sans);
+        font-size: 17px;
+        margin-bottom: 8px;
+      }
+      .culture-sub p {
+        font-size: 13px;
+        line-height: 1.7;
+        color: rgba(241, 233, 214, 0.8);
+      }
+
+      /* ---------- AI assistant ---------- */
+      .assistant {
+        background: var(--ink);
+        position: relative;
+        padding: min(14vw, 180px) 6vw;
+        text-align: center;
+      }
+      .assistant .eyebrow {
+        justify-content: center;
+        margin: 0 auto 22px;
+      }
+      .assistant h2 {
+        font-family: var(--bn-serif);
+        font-size: clamp(34px, 5.5vw, 68px);
+        font-weight: 700;
+        max-width: 900px;
+        margin: 0 auto;
+        line-height: 1.15;
+      }
+      .assistant .sub {
+        margin-top: 18px;
+        font-size: 15px;
+        color: var(--khaki);
+        max-width: 520px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .ai-box {
+        max-width: 720px;
+        margin: 48px auto 0;
+        border: 1px solid rgba(241, 233, 214, 0.2);
+        border-radius: 40px;
+        padding: 8px 8px 8px 26px;
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        background: rgba(241, 233, 214, 0.03);
+        transition: border-color 0.3s;
+      }
+      .ai-box:focus-within {
+        border-color: var(--gold);
+      }
+      .ai-box input {
+        flex: 1;
+        background: transparent;
+        border: none;
+        outline: none;
+        color: var(--paper);
+        font-family: var(--sans);
+        font-size: 14.5px;
+        padding: 14px 0;
+      }
+      .ai-box input::placeholder {
+        color: var(--khaki);
+      }
+      .ai-box button {
+        background: var(--gold);
+        color: var(--ink);
+        border: none;
+        border-radius: 32px;
+        padding: 14px 26px;
+        font-family: var(--sans);
+        font-size: 13px;
+        font-weight: 700;
+        letter-spacing: 0.02em;
+        cursor: pointer;
+        white-space: nowrap;
+      }
+      .ai-prompts {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        justify-content: center;
+        margin-top: 26px;
+      }
+      .ai-chip {
+        font-size: 12.5px;
+        padding: 9px 16px;
+        border: 1px solid rgba(241, 233, 214, 0.18);
+        border-radius: 30px;
+        color: var(--paper-dim);
+        cursor: pointer;
+        transition: 0.25s;
+      }
+      .ai-chip:hover {
+        border-color: var(--gold);
+        color: var(--gold-soft);
+      }
+      .ai-note {
+        margin-top: 34px;
+        font-size: 11.5px;
+        letter-spacing: 0.05em;
+        color: var(--khaki);
+        opacity: 0.7;
+      }
+
+      /* ---------- footer ---------- */
+      footer {
+        background: var(--ink-soft);
+        padding: 100px 6vw 40px;
+      }
+      .footer-top {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 50px;
+        padding-bottom: 70px;
+        border-bottom: 1px solid var(--line);
+      }
+      .footer-brand .logo {
+        font-size: 30px;
+      }
+      .footer-brand p {
+        margin-top: 16px;
+        max-width: 280px;
+        font-size: 13px;
+        line-height: 1.7;
+        color: var(--khaki);
+      }
+      .footer-cols {
+        display: flex;
+        gap: 70px;
+        flex-wrap: wrap;
+      }
+      .footer-col h6 {
+        font-size: 11px;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        color: var(--gold-soft);
+        margin-bottom: 18px;
+      }
+      .footer-col ul {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 11px;
+        font-size: 13.5px;
+        color: var(--paper-dim);
+      }
+      .footer-col a:hover {
+        color: var(--gold-soft);
+      }
+      .footer-bottom {
+        display: flex;
+        justify-content: space-between;
+        padding-top: 30px;
+        font-size: 11.5px;
+        color: var(--khaki);
+        flex-wrap: wrap;
+        gap: 14px;
+      }
+
+      /* reveal helper */
+      .reveal {
+        opacity: 0;
+        transform: translateY(36px);
+      }
+
+      /* magnetic */
+      .magnetic {
+        display: inline-block;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="river-thread">
+      <svg
+        width="60"
+        height="100vh"
+        viewBox="0 0 60 900"
+        preserveAspectRatio="none"
+      >
+        <path
+          id="river-path-bg"
+          d="M30 0 C10 90 50 170 25 260 C0 350 45 420 20 510 C-5 600 40 670 22 760 C10 820 30 860 30 900"
+          pathLength="1300"
+        />
+        <path
+          id="river-path-fg"
+          d="M30 0 C10 90 50 170 25 260 C0 350 45 420 20 510 C-5 600 40 670 22 760 C10 820 30 860 30 900"
+          pathLength="1300"
+        />
+      </svg>
+    </div>
+
+    <header>
+      <a href="#top" class="logo">
+        সোনার বাংলা
+        <span>The Encyclopedia of Bangladesh</span>
+      </a>
+      <nav>
+        <ul>
+          <li><a href="#glance">At a Glance</a></li>
+          <li><a href="#rivers">Rivers</a></li>
+          <li><a href="#destinations">Destinations</a></li>
+          <li><a href="#map">Map</a></li>
+          <li><a href="#unesco">Heritage</a></li>
+          <li><a href="#timeline">History</a></li>
+        </ul>
+      </nav>
+      <div class="menu-btn">MENU</div>
+    </header>
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-media" id="heroMedia">
+        <img
+          src="https://commons.wikimedia.org/wiki/Special:FilePath/Beauty_of_Sundarban,_Largest_Mangrove_Forest_in_the_world.jpg?width=1800"
+          alt="Sundarbans mangrove waterway at dusk"
+        />
+      </div>
+      <div class="hero-scrim"></div>
+      <div class="hero-grain"></div>
+      <div class="hero-content">
+        <div class="hero-eyebrow" id="heroEyebrow">
+          Est. 1971 — Land of the Bengal Delta
+        </div>
+        <h1 class="hero-title" id="heroTitle">
+          <span class="word"><span>বাংলা</span></span
+          ><span class="word"><span>দেশ</span></span>
+        </h1>
+        <div class="hero-sub" id="heroSub">
+          <span class="bn-line"
+            >নদী, মাটি আর মানুষের গল্প বলা এক জীবন্ত বিশ্বকোষ</span
+          >
+          <span class="en-line"
+            >A living encyclopedia of the world's largest river delta</span
+          >
+        </div>
+      </div>
+      <div class="scroll-cue" id="heroCue">
+        <span class="bar"></span>Scroll to begin
+      </div>
+    </section>
+
+    <!-- QUOTE -->
+    <section class="quote-section">
+      <div class="wrap">
+        <p class="quote-bn reveal">
+          এই দেশ জলে ভাসে, পলিমাটিতে দাঁড়ায়, আর মানুষের গানে যুগ যুগ ধরে বেঁচে
+          থাকে।
+        </p>
+        <p class="quote-en reveal">
+          This land floats on water, stands on silt, and lives on through
+          generations in the song of its people.
+        </p>
+      </div>
+    </section>
+
+    <!-- GLANCE -->
+    <section class="glance" id="glance">
+      <div class="head">
+        <div>
+          <div class="eyebrow reveal">Bangladesh at a Glance</div>
+          <h2 class="reveal">এক নজরে বাংলাদেশ</h2>
+        </div>
+        <p class="glance-lede reveal">
+          A nation smaller than the U.S. state of Iowa, carrying one of the
+          densest, most river-woven populations on Earth — where the Ganges,
+          Brahmaputra and Meghna finally meet the sea.
+        </p>
+      </div>
+      <div class="stat-grid">
+        <div class="stat reveal">
+          <div class="stat-num">
+            <span class="count" data-target="148460">0</span
+            ><span class="stat-unit">km²</span>
+          </div>
+          <div class="stat-label">Total Land Area</div>
+          <div class="stat-bn">মোট আয়তন</div>
+        </div>
+        <div class="stat reveal">
+          <div class="stat-num">
+            <span class="count" data-target="170">0</span
+            ><span class="stat-unit">million+</span>
+          </div>
+          <div class="stat-label">Population</div>
+          <div class="stat-bn">জনসংখ্যা</div>
+        </div>
+        <div class="stat reveal">
+          <div class="stat-num">
+            <span class="count" data-target="64">0</span
+            ><span class="stat-unit">districts</span>
+          </div>
+          <div class="stat-label">Zila, Across 8 Divisions</div>
+          <div class="stat-bn">জেলা</div>
+        </div>
+        <div class="stat reveal">
+          <div class="stat-num">
+            <span class="count" data-target="3">0</span
+            ><span class="stat-unit">sites</span>
+          </div>
+          <div class="stat-label">UNESCO World Heritage</div>
+          <div class="stat-bn">বিশ্ব ঐতিহ্য স্থান</div>
+        </div>
+        <div class="stat reveal">
+          <div class="stat-num">
+            <span class="count" data-target="1971">0</span
+            ><span class="stat-unit"></span>
+          </div>
+          <div class="stat-label">Year of Independence</div>
+          <div class="stat-bn">স্বাধীনতা</div>
+        </div>
+        <div class="stat reveal">
+          <div class="stat-num">
+            <span class="count" data-target="230">0</span
+            ><span class="stat-unit">+</span>
+          </div>
+          <div class="stat-label">Named Rivers</div>
+          <div class="stat-bn">নদীসমূহ</div>
+        </div>
+        <div class="stat reveal">
+          <div class="stat-num">
+            <span class="count" data-target="10000">0</span
+            ><span class="stat-unit">km²</span>
+          </div>
+          <div class="stat-label">Sundarbans Mangrove</div>
+          <div class="stat-bn">সুন্দরবন</div>
+        </div>
+        <div class="stat reveal">
+          <div class="stat-num">
+            <span class="count" data-target="8">0</span
+            ><span class="stat-unit">Divisions</span>
+          </div>
+          <div class="stat-label">Administrative Regions</div>
+          <div class="stat-bn">বিভাগ</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- RIVERS -->
+    <section class="rivers" id="rivers">
+      <div class="rivers-inner">
+        <div class="rivers-text">
+          <div class="eyebrow" style="color: var(--gold-soft)">
+            The Nation's Bloodstream
+          </div>
+          <h2 class="reveal">নদীমাতৃক<br />বাংলাদেশ</h2>
+          <p class="reveal">
+            No country on Earth is shaped as completely by rivers. The Ganges,
+            Brahmaputra and Meghna converge here, in the largest river delta in
+            the world, before surrendering to the Bay of Bengal — carrying silt
+            that has built the land itself, harvest after harvest, for
+            millennia.
+          </p>
+          <div class="river-list">
+            <div class="river-row reveal">
+              <span>Padma</span><span>পদ্মা</span>
+            </div>
+            <div class="river-row reveal">
+              <span>Jamuna</span><span>যমুনা</span>
+            </div>
+            <div class="river-row reveal">
+              <span>Meghna</span><span>মেঘনা</span>
+            </div>
+            <div class="river-row reveal">
+              <span>Surma</span><span>সুরমা</span>
+            </div>
+            <div class="river-row reveal">
+              <span>Karnaphuli</span><span>কর্ণফুলী</span>
+            </div>
+          </div>
+        </div>
+        <div class="rivers-media">
+          <img
+            id="riverImg"
+            src="https://commons.wikimedia.org/wiki/Special:FilePath/Boats_in_Padma_River_Daulatdia_Ghat_Rajbari_Bangladesh.JPG?width=1400"
+            alt="Boats on the Padma River at Daulatdia Ghat"
+          />
+        </div>
+      </div>
+    </section>
+
+    <!-- DESTINATIONS -->
+    <section class="dest-pin" id="destinations">
+      <div class="dest-head">
+        <div class="eyebrow">Featured Destinations</div>
+        <h2 class="reveal">গন্তব্যসমূহ</h2>
+      </div>
+      <div class="dest-track" id="destTrack">
+        <div class="dest-card">
+          <img
+            src="https://commons.wikimedia.org/wiki/Special:FilePath/The_mighty_Mangrove_forest.jpg?width=1000"
+            alt="Sundarbans mangrove forest"
+          />
+          <div class="dest-scrim"></div>
+          <div class="dest-num">01</div>
+          <div class="dest-info">
+            <span class="place-en">Khulna Division</span>
+            <h3>সুন্দরবন</h3>
+            <p>
+              The world's largest mangrove forest, home to the Royal Bengal
+              Tiger and a maze of tidal rivers.
+            </p>
+          </div>
+        </div>
+        <div class="dest-card">
+          <img
+            src="https://commons.wikimedia.org/wiki/Special:FilePath/Lakkatura_Tea_Garden_(Sylhet)_in_2021.21.jpg?width=1000"
+            alt="Tea garden in Sylhet"
+          />
+          <div class="dest-scrim"></div>
+          <div class="dest-num">02</div>
+          <div class="dest-info">
+            <span class="place-en">Sylhet Division</span>
+            <h3>চা বাগান, সিলেট</h3>
+            <p>
+              Rolling emerald hills of tea, wrapped in monsoon mist since the
+              1850s.
+            </p>
+          </div>
+        </div>
+        <div class="dest-card">
+          <img
+            src="https://commons.wikimedia.org/wiki/Special:FilePath/Sixty_Dome_Mosque_by_Hzbrlo_1.jpg?width=1000"
+            alt="Sixty Dome Mosque, Bagerhat"
+          />
+          <div class="dest-scrim"></div>
+          <div class="dest-num">03</div>
+          <div class="dest-info">
+            <span class="place-en">Khulna Division</span>
+            <h3>ষাট গম্বুজ মসজিদ</h3>
+            <p>
+              A 15th-century Sultanate masterpiece — 81 domes resting on sixty
+              stone pillars.
+            </p>
+          </div>
+        </div>
+        <div class="dest-card">
+          <img
+            src="https://commons.wikimedia.org/wiki/Special:FilePath/T-badh,_Padma_River_in_Rajshahi.jpg?width=1000"
+            alt="Padma River at Rajshahi"
+          />
+          <div class="dest-scrim"></div>
+          <div class="dest-num">04</div>
+          <div class="dest-info">
+            <span class="place-en">Rajshahi Division</span>
+            <h3>পদ্মা নদী</h3>
+            <p>
+              The great river that defines the northwest — silk country, mango
+              orchards, endless horizon.
+            </p>
+          </div>
+        </div>
+        <div class="dest-card">
+          <img
+            src="https://commons.wikimedia.org/wiki/Special:FilePath/Mangrove_Forest_in_Barguna,_Bangladesh.jpg?width=1000"
+            alt="Coastal mangroves, Barguna"
+          />
+          <div class="dest-scrim"></div>
+          <div class="dest-num">05</div>
+          <div class="dest-info">
+            <span class="place-en">Barishal Division</span>
+            <h3>উপকূলীয় বরগুনা</h3>
+            <p>
+              Where the delta dissolves into the Bay of Bengal, island by
+              island.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MAP -->
+    <section class="map-section" id="map">
+      <div class="map-inner">
+        <div class="map-copy">
+          <div class="eyebrow">Interactive Map</div>
+          <h2>আটটি বিভাগ</h2>
+          <p>
+            Bangladesh is organised into eight administrative divisions, each
+            carrying its own dialect, cuisine, and landscape. Hover or tap a
+            region to preview it — full district-level drilldowns (population,
+            history, food, weather, galleries) are the next layer of this
+            encyclopedia.
+          </p>
+        </div>
+        <div class="map-stage">
+          <div class="map-svg-wrap" id="mapWrap">
+            <!-- divisions positioned by JS-friendly inline style, roughly per real geography -->
+            <div
+              class="division"
+              data-name="রংপুর"
+              data-en="Rangpur"
+              data-pop="15.8M"
+              data-area="16,317 km²"
+              data-desc="Bangladesh's northern frontier — vast paddy plains along the Teesta and Brahmaputra."
+              style="left: 34%; top: 2%; width: 26%; height: 20%"
+            >
+              <span>রংপুর</span>
+            </div>
+            <div
+              class="division"
+              data-name="রাজশাহী"
+              data-en="Rajshahi"
+              data-pop="19.8M"
+              data-area="18,197 km²"
+              data-desc="Silk, mangoes and the mighty Padma — the historic gateway to North Bengal."
+              style="left: 6%; top: 24%; width: 28%; height: 22%"
+            >
+              <span>রাজশাহী</span>
+            </div>
+            <div
+              class="division"
+              data-name="ময়মনসিংহ"
+              data-en="Mymensingh"
+              data-pop="12.5M"
+              data-area="10,584 km²"
+              data-desc="Bangladesh's youngest division, cradled by the Brahmaputra's old course."
+              style="left: 48%; top: 16%; width: 24%; height: 20%"
+            >
+              <span>ময়মনসিংহ</span>
+            </div>
+            <div
+              class="division"
+              data-name="সিলেট"
+              data-en="Sylhet"
+              data-pop="11.5M"
+              data-area="12,596 km²"
+              data-desc="Misted tea gardens, wetland haors, and the country's spiritual northeast."
+              style="left: 70%; top: 8%; width: 26%; height: 24%"
+            >
+              <span>সিলেট</span>
+            </div>
+            <div
+              class="division"
+              data-name="ঢাকা"
+              data-en="Dhaka"
+              data-pop="44M"
+              data-area="20,594 km²"
+              data-desc="The pulsing capital region — rickshaw bells, river ports, a thousand years of history."
+              style="left: 38%; top: 38%; width: 26%; height: 22%"
+            >
+              <span>ঢাকা</span>
+            </div>
+            <div
+              class="division"
+              data-name="খুলনা"
+              data-en="Khulna"
+              data-pop="17M"
+              data-area="22,285 km²"
+              data-desc="Gateway to the Sundarbans — mangrove, shrimp ghers, and the Sixty Dome Mosque."
+              style="left: 6%; top: 56%; width: 28%; height: 22%"
+            >
+              <span>খুলনা</span>
+            </div>
+            <div
+              class="division"
+              data-name="বরিশাল"
+              data-en="Barishal"
+              data-pop="8.3M"
+              data-area="13,225 km²"
+              data-desc="The 'Venice of Bengal' — a labyrinth of rivers, floating guava markets, green paddy."
+              style="left: 34%; top: 64%; width: 24%; height: 20%"
+            >
+              <span>বরিশাল</span>
+            </div>
+            <div
+              class="division"
+              data-name="চট্টগ্রাম"
+              data-en="Chattogram"
+              data-pop="33M"
+              data-area="33,771 km²"
+              data-desc="Hill tracts, the port city, and the world's longest natural sea beach at Cox's Bazar."
+              style="left: 58%; top: 52%; width: 30%; height: 32%"
+            >
+              <span>চট্টগ্রাম</span>
+            </div>
+          </div>
+          <div class="map-panel" id="mapPanel">
+            <div class="p-title" id="pTitle"></div>
+            <div class="p-en" id="pEn"></div>
+            <div class="p-facts">
+              <div>Population<b id="pPop"></b></div>
+              <div>Area<b id="pArea"></b></div>
+            </div>
+            <div class="p-desc" id="pDesc"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- UNESCO -->
+    <section class="unesco" id="unesco">
+      <div class="unesco-head">
+        <div class="eyebrow">World Heritage</div>
+        <h2 class="reveal">বিশ্ব ঐতিহ্য</h2>
+      </div>
+      <div class="unesco-grid">
+        <div class="unesco-card reveal">
+          <div class="unesco-media">
+            <img
+              src="https://commons.wikimedia.org/wiki/Special:FilePath/Beauty_of_Sundarban,_Largest_Mangrove_Forest_in_the_world.jpg?width=900"
+              alt="Sundarbans"
+            />
+          </div>
+          <div class="unesco-body">
+            <div class="yr">Inscribed 1997</div>
+            <h3>সুন্দরবন</h3>
+            <p>
+              The largest contiguous mangrove forest on Earth, spanning the
+              delta where the Ganges meets the sea — and the last stronghold of
+              the wild Royal Bengal Tiger.
+            </p>
+          </div>
+        </div>
+        <div class="unesco-card reveal">
+          <div class="unesco-media">
+            <img
+              src="https://commons.wikimedia.org/wiki/Special:FilePath/Sixty_Dome_Mosque_by_Hzbrlo_1.jpg?width=900"
+              alt="Historic Mosque City of Bagerhat"
+            />
+          </div>
+          <div class="unesco-body">
+            <div class="yr">Inscribed 1985</div>
+            <h3>মসজিদের শহর বাগেরহাট</h3>
+            <p>
+              A 15th-century Sultanate capital of brick mosques and mausoleums,
+              built by the saint-general Khan Jahan Ali in the Sundarbans'
+              shadow.
+            </p>
+          </div>
+        </div>
+        <div class="unesco-card reveal">
+          <div class="unesco-media">
+            <img
+              src="https://commons.wikimedia.org/wiki/Special:FilePath/Tea_Garden_in_Jaflong_Sylhet_Bangladesh_06.JPG?width=900"
+              alt="Somapura Mahavihara region"
+            />
+          </div>
+          <div class="unesco-body">
+            <div class="yr">Inscribed 1985</div>
+            <h3>পাহাড়পুর বৌদ্ধ বিহার</h3>
+            <p>
+              Somapura Mahavihara — the largest Buddhist monastery south of the
+              Himalayas, a scholarly beacon of the Pala Empire.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TIMELINE -->
+    <section class="timeline" id="timeline">
+      <div class="timeline-head">
+        <div class="eyebrow">History, Chosen Moments</div>
+        <h2 class="reveal">ইতিহাসের পথ</h2>
+      </div>
+      <div class="timeline-list">
+        <div class="t-row reveal">
+          <div class="t-year">1952</div>
+          <div class="t-body">
+            <h4 class="bn">ভাষা আন্দোলন</h4>
+            <p>
+              Students in Dhaka are killed defending Bengali as a state language
+              — the Language Movement becomes the moral root of a future nation,
+              and its date, February 21, is now the UN's International Mother
+              Language Day.
+            </p>
+          </div>
+        </div>
+        <div class="t-row reveal">
+          <div class="t-year">1971</div>
+          <div class="t-body">
+            <h4 class="bn">মুক্তিযুদ্ধ</h4>
+            <p>
+              A nine-month Liberation War, fought against immense odds, ends on
+              16 December 1971 with the birth of an independent Bangladesh.
+            </p>
+          </div>
+        </div>
+        <div class="t-row reveal">
+          <div class="t-year">1972</div>
+          <div class="t-body">
+            <h4 class="bn">নতুন সংবিধান</h4>
+            <p>
+              Bangladesh adopts its constitution, founded on nationalism,
+              secularism, democracy and socialism.
+            </p>
+          </div>
+        </div>
+        <div class="t-row reveal">
+          <div class="t-year">1999</div>
+          <div class="t-body">
+            <h4 class="bn">একুশে ফেব্রুয়ারি</h4>
+            <p>
+              UNESCO declares 21 February International Mother Language Day,
+              carrying Bangladesh's 1952 sacrifice to the entire world.
+            </p>
+          </div>
+        </div>
+        <div class="t-row reveal">
+          <div class="t-year">Today</div>
+          <div class="t-body">
+            <h4 class="bn">চলমান গল্প</h4>
+            <p>
+              A young, fast-growing nation of writers, garment workers, farmers
+              and engineers — still being written, river by river.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CULTURE -->
+    <section class="culture" id="culture">
+      <div class="culture-head">
+        <div class="eyebrow" style="color: var(--paper)">উৎসব ও সংস্কৃতি</div>
+        <h2>Festivals & Culture</h2>
+      </div>
+      <div class="marquee">
+        <div class="track">
+          <span class="item">পহেলা বৈশাখ <small>Pohela Boishakh</small></span>
+          <span class="item">ঈদুল ফিতর <small>Eid-ul-Fitr</small></span>
+          <span class="item">দুর্গাপূজা <small>Durga Puja</small></span>
+          <span class="item">বিজয় দিবস <small>Victory Day</small></span>
+          <span class="item">নবান্ন <small>Nabanna</small></span>
+          <span class="item">পহেলা বৈশাখ <small>Pohela Boishakh</small></span>
+          <span class="item">ঈদুল ফিতর <small>Eid-ul-Fitr</small></span>
+          <span class="item">দুর্গাপূজা <small>Durga Puja</small></span>
+          <span class="item">বিজয় দিবস <small>Victory Day</small></span>
+          <span class="item">নবান্ন <small>Nabanna</small></span>
+        </div>
+      </div>
+      <div class="culture-sub">
+        <div class="c-item">
+          <h5 class="bn-sans">মঙ্গল শোভাযাত্রা</h5>
+          <p>
+            Dhaka's Bengali New Year procession, led by the Faculty of Fine Arts
+            since 1989, inscribed by UNESCO as Intangible Cultural Heritage.
+          </p>
+        </div>
+        <div class="c-item">
+          <h5 class="bn-sans">ইলিশ ও পান্তা ভাত</h5>
+          <p>
+            Fried hilsa and watered rice — the taste of Pohela Boishakh morning,
+            eaten at dawn across the delta.
+          </p>
+        </div>
+        <div class="c-item">
+          <h5 class="bn-sans">বাউল গান</h5>
+          <p>
+            The mystic folk songs of Lalon and the Baul tradition — Bengal's
+            wandering philosophers set to music.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- AI ASSISTANT -->
+    <section class="assistant" id="assistant">
+      <div class="eyebrow">AI Discovery Assistant</div>
+      <h2>
+        প্রশ্ন করুন, জেনে নিন —
+        <span style="color: var(--gold-soft)"
+          >ask anything about Bangladesh</span
+        >
+      </h2>
+      <p class="sub">
+        Plan a 7-day trip, trace the history of Paharpur, or find a waterfall
+        near Sylhet. This is the interface layer — it wires into the same
+        knowledge base as the rest of the encyclopedia.
+      </p>
+      <div class="ai-box">
+        <input
+          type="text"
+          placeholder="Plan a 7-day trip through Bangladesh…"
+        />
+        <button type="button">Ask →</button>
+      </div>
+      <div class="ai-prompts">
+        <div class="ai-chip">Explain the history of Paharpur</div>
+        <div class="ai-chip">Find waterfalls near Sylhet</div>
+        <div class="ai-chip">Historical places in Rajshahi</div>
+        <div class="ai-chip">Foods unique to Chattogram</div>
+      </div>
+      <div class="ai-note">
+        Prototype interface — not yet connected to a live model in this preview.
+      </div>
+    </section>
+
+    <footer>
+      <div class="footer-top">
+        <div class="footer-brand">
+          <div class="logo">সোনার বাংলা</div>
+          <p>
+            A cinematic digital encyclopedia dedicated to the landscapes,
+            history, language and people of Bangladesh.
+          </p>
+        </div>
+        <div class="footer-cols">
+          <div class="footer-col">
+            <h6>Explore</h6>
+            <ul>
+              <li><a href="#map">Divisions</a></li>
+              <li><a href="#destinations">Destinations</a></li>
+              <li><a href="#unesco">Heritage</a></li>
+              <li><a href="#timeline">History</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h6>Culture</h6>
+            <ul>
+              <li><a href="#culture">Festivals</a></li>
+              <li><a href="#culture">Food</a></li>
+              <li><a href="#assistant">Ask AI</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h6>Project</h6>
+            <ul>
+              <li><a href="#">About</a></li>
+              <li><a href="#">Sources</a></li>
+              <li><a href="#">Contact</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span
+          >© 2026 সোনার বাংলা — Design concept, built for storytelling.</span
+        >
+        <span>Photography via Wikimedia Commons contributors.</span>
+      </div>
+    </footer>
+
+    <script>
+      gsap.registerPlugin(ScrollTrigger);
+
+      /* Hero entrance */
+      const tl = gsap.timeline({ defaults: { ease: "power4.out" } });
+      tl.to(".hero-title .word span", {
+        y: 0,
+        duration: 1.3,
+        stagger: 0.12,
+        delay: 0.3,
+      })
+        .to("#heroEyebrow", { opacity: 1, duration: 0.9 }, "-=1.0")
+        .to("#heroSub", { opacity: 1, duration: 1 }, "-=0.9")
+        .to("#heroCue", { opacity: 1, duration: 0.8 }, "-=0.6");
+
+      gsap.to("#heroMedia img", {
+        scale: 1,
+        duration: 2.6,
+        ease: "power2.out",
+      });
+      gsap.to("#heroMedia img", {
+        yPercent: 14,
+        ease: "none",
+        scrollTrigger: {
+          trigger: ".hero",
+          start: "top top",
+          end: "bottom top",
+          scrub: true,
+        },
+      });
+
+      /* Generic reveal */
+      document.querySelectorAll(".reveal").forEach((el) => {
+        gsap.to(el, {
+          opacity: 1,
+          y: 0,
+          duration: 1.1,
+          ease: "power3.out",
+          scrollTrigger: { trigger: el, start: "top 88%" },
+        });
+      });
+
+      /* River thread progress */
+      const fg = document.getElementById("river-path-fg");
+      window.addEventListener("scroll", () => {
+        const h = document.documentElement.scrollHeight - window.innerHeight;
+        const p = Math.min(window.scrollY / h, 1);
+        fg.style.strokeDashoffset = 1300 - 1300 * p;
+      });
+
+      /* Counters */
+      document.querySelectorAll(".count").forEach((el) => {
+        const target = parseInt(el.dataset.target, 10);
+        ScrollTrigger.create({
+          trigger: el,
+          start: "top 90%",
+          once: true,
+          onEnter: () => {
+            let obj = { v: 0 };
+            gsap.to(obj, {
+              v: target,
+              duration: 1.8,
+              ease: "power2.out",
+              onUpdate: () => {
+                el.textContent = Math.floor(obj.v).toLocaleString("en-US");
+              },
+            });
+          },
+        });
+      });
+
+      /* Rivers media parallax */
+      gsap.to("#riverImg", {
+        yPercent: -12,
+        ease: "none",
+        scrollTrigger: {
+          trigger: ".rivers",
+          start: "top bottom",
+          end: "bottom top",
+          scrub: true,
+        },
+      });
+
+      /* Destinations horizontal pinned scroll */
+      function initDestScroll() {
+        const track = document.getElementById("destTrack");
+        const pin = document.querySelector(".dest-pin");
+        if (window.innerWidth < 760) {
+          return;
+        }
+        const getScrollAmount = () =>
+          track.scrollWidth - pin.offsetWidth + window.innerWidth * 0.06;
+        ScrollTrigger.create({
+          trigger: pin,
+          start: "top top",
+          end: () => "+=" + getScrollAmount(),
+          pin: true,
+          scrub: 1,
+          onUpdate: (self) => {
+            gsap.set(track, { x: -self.progress * getScrollAmount() });
+          },
+        });
+      }
+      initDestScroll();
+
+      /* Map interactivity */
+      const panel = document.getElementById("mapPanel");
+      document.querySelectorAll(".division").forEach((div) => {
+        div.addEventListener("mouseenter", () => show(div));
+        div.addEventListener("click", () => show(div));
+      });
+      function show(div) {
+        document
+          .querySelectorAll(".division")
+          .forEach((d) => d.classList.remove("active"));
+        div.classList.add("active");
+        document.getElementById("pTitle").textContent = div.dataset.name;
+        document.getElementById("pEn").textContent =
+          div.dataset.en + " Division";
+        document.getElementById("pPop").textContent = div.dataset.pop;
+        document.getElementById("pArea").textContent = div.dataset.area;
+        document.getElementById("pDesc").textContent = div.dataset.desc;
+        panel.classList.add("show");
+      }
+
+      /* Magnetic buttons */
+      document.querySelectorAll(".ai-box button, .ai-chip").forEach((btn) => {
+        btn.addEventListener("mousemove", (e) => {
+          const r = btn.getBoundingClientRect();
+          const x = e.clientX - r.left - r.width / 2;
+          const y = e.clientY - r.top - r.height / 2;
+          gsap.to(btn, {
+            x: x * 0.25,
+            y: y * 0.4,
+            duration: 0.4,
+            ease: "power3.out",
+          });
+        });
+        btn.addEventListener("mouseleave", () =>
+          gsap.to(btn, {
+            x: 0,
+            y: 0,
+            duration: 0.5,
+            ease: "elastic.out(1,0.4)",
+          }),
+        );
+      });
+
+      /* smooth nav for header contrast */
+      ScrollTrigger.refresh();
+    </script>
+  </body>
+</html>
